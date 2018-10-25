@@ -1,0 +1,19 @@
+{
+  "name": "visualeyes",
+  "version": "1.0.0",
+  "description": "MongodDB GUI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VisualEyez-DB/visualizeyes.git"
+  },
+  "author": "Violent_Hunters",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VisualEyez-DB/visualizeyes/issues"
+  },
+  "homepage": "https://github.com/VisualEyez-DB/visualizeyes#readme"
+}
