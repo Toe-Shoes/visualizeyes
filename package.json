@@ -21,10 +21,15 @@
   "homepage": "https://github.com/VisualEyez-DB/visualizeyes#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "css-loader": "^1.0.0",
     "express": "^4.16.4",
     "mongoose": "^5.3.6",
     "node-sass": "^4.9.4",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "react": "^16.6.0",
+    "react-hot-loader": "^4.3.11",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
