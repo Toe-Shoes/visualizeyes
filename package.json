@@ -4,9 +4,9 @@
   "description": "MongodDB GUI",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
     "start": "npm run build && node server/server.js",
-    "client": "webpack-dev-server -- mode development --devtool",
+    "client": "webpack-dev-server --mode development --devtool",
     "server": "nodemon server/sever.js"
   },
   "repository": {
