@@ -4,9 +4,9 @@
   "description": "MongodDB GUI",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack",
     "start": "npm run build && node server/server.js",
-    "client": "webpack-dev-server --mode development --devtool",
+    "client": "webpack-dev-server --mode development --devtool inline-source-map",
     "server": "nodemon server/sever.js"
   },
   "repository": {
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.4",
+    "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
