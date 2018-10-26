@@ -7,7 +7,7 @@
     "build": "webpack",
     "start": "npm run build && node server/server.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map",
-    "server": "nodemon server/sever.js"
+    "server": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
