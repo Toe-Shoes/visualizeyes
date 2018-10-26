@@ -1,9 +1,10 @@
 import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-// import reducers from './reducers/index';
+import databaseReducers from './reducers/databaseReducer';
 
-// const store = createStore(
-//   // composeWithDevTools()
-// );
+const store = createStore(
+  databaseReducers,
+  composeWithDevTools()
+);
 
 export default store;
