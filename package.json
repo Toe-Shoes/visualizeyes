@@ -6,8 +6,8 @@
   "scripts": {
     "build": "webpack",
     "start": "npm run build && node server/server.js",
-    "client": "webpack-dev-server --mode development --devtool inline-source-map",
-    "server": "nodemon server/sever.js"
+    "client": "webpack-dev-server --mode development --devtool eval-source-map",
+    "server": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
