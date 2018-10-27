@@ -17,25 +17,30 @@ dbController.getDatabase = (req, res, next) => {
     // coll returns a promise so we use .then
     //* We need async await here so that we properly saving the documents in our response
     coll
-      .then( async collections => {
-        // we loop through the collections and use .find to get all the documents in the collection
-        for (let i = 0; i < collections.length; i++) {
-          // console.log("----Collections----");
-          // console.log(collections[i]);
-          let collectionName = collections[i].name;
-          // * Crashing
-          let Collection = mongoose.model(collectionName, new Schema({}), collectionName);
-          // *Crashing
+      .then(async collections => {
+        try {
+          // we loop through the collections and use .find to get all the documents in the collection
+          for (let i = 0; i < collections.length; i++) {
+            let collectionName = collections[i].name;
+            let modelNames = mongoose.connection.modelNames();
+            let Collection;
 
-          // * Await allows us to properly save our documents
-          await Collection.find().then(docs => {
-            res.locals[collectionName] = docs;
-            delete mongoose.connection.models[collectionName];
-          });
+            if(modelNames.indexOf(collectionName) !== -1){
+              Collection = mongoose.connection.model(collectionName);
+            }else{
+              Collection = mongoose.model(collectionName, new Schema({}), collectionName);
+            } 
+
+            // * Await allows us to properly save our documents
+            await Collection.find().then(docs => {
+              console.log("IT REACHES HERE")
+              res.locals[collectionName] = docs;
+            });
+          }
+
+          next();
         }
-
-        mongoose.connection.close();
-        next();
+        catch (err) { console.log(err); }
       })
       .catch(err => console.log("-----CollectionError-----", err));
   });
