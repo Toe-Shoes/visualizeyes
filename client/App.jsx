@@ -7,7 +7,7 @@ import LandingPage from './containers/LandingPage.jsx';
 
 
 const mapStateToProps = store => ({
-  connection: store.database.connection
+  connection: store.connection
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -22,11 +22,12 @@ class App extends Component {
   }
 
 
+
   render() {
     return (
       <div id="container">
         <div>
-          {this.props.connected === true ? (
+          {this.props.connection === true ? (
             <MainContainer />
           ) : (
             <LandingPage />

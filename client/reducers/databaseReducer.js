@@ -11,10 +11,6 @@ const databaseReducer = (state = initalState, action) => {
 
   switch (action.type) {
 
-    // case types.GET_DB:{
-    //   fetch(`{state.url}`)
-    // },
-
     case types.actionTypes.SET_URL:{
       let url = action.payload;
       return {
@@ -23,7 +19,13 @@ const databaseReducer = (state = initalState, action) => {
       };
     }
 
-
+    case types.actionTypes.CHANGE_CONNECTION: {
+      let connection = !state.connection;
+      return {
+        ...state,
+        connection,
+      }
+    }
 
     default:
       return state;

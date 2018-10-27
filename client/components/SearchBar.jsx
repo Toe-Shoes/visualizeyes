@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 
 const SearchBar = (props) => {
   return (
-    <form>
+    <div>
     <input
       placeholder="Uri search"
       onChange={(e) => {
         props.setUrl(e.target.value);
       }}
     />
-    <button> Connect </button>
-    </form>
+    <button onClick={() => {props.fetchOnClick()}}> Connect </button>
+    </div>
   );
 }
 
