@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 const mapStateToProps = store => ({
 
@@ -14,8 +14,8 @@ class FileContainer extends Component {
     super(props);
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div id="file-container">
         <h1>This is our file container</h1>
       </div>

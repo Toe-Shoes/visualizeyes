@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FileContainer from './containers/FileContainer.jsx';
+import DatabaseContainer from './containers/DatabaseContainer.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class App extends Component {
     return (
       <div id="container">
         <FileContainer />
+        <DatabaseContainer />
       </div>
     )
   }
