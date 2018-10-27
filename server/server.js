@@ -34,11 +34,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/app', dbController.getCollections, (req, res) => {
-  console.log(res.locals.data, '-------RES!!!!!!!!!!-------')
-  res.status(200).json({
-    Message: 'Your M-Lab Data should be here',
-    data: res.locals.data
-  });
+  console.log(res.locals, '-------RES!!!!!!!!!!-------')
+  // res.status(200).json({
+  //   Message: 'Your M-Lab Data should be here',
+  //   data: res.locals.data
+  // });
+
+  res.send(res.locals);
 });
 
 //if anything else redifect us to index.html
