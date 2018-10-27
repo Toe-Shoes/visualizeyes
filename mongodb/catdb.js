@@ -15,7 +15,7 @@ dbController.getCollections = (req, res, next) => {
     const coll = mongoose.connection.db.listCollections().toArray();
     coll.then(async(collections) => {
       console.log("--------COLLECTIONS---------", collections);
-      
+
       for (let i = 0; i < collections.length; i++) {
         const collectionName = collections[i].name;
         console.log("----HERE-----", collectionName);
@@ -30,31 +30,7 @@ dbController.getCollections = (req, res, next) => {
       next();
     });
   });
-  console.log(arr);
 }
-
-// dbController.getCollections = (req, res, next) => {
-//   MongoClient.connect(url, (err, client) => {
-//     if(err) throw err;
-//     let db = client.db('violent-hunters');
-
-//     db.collections((err, collections) => {
-//       console.log('------collections---------', collections);
-//       collections.forEach((collection) => {
-//         const cursor = collection.find(); //creates a cursor
-//         const docs = cursor.toArray();
-//         docs.then((something) => {
-//           console.log(something);
-//         })
-//       })
-//     });
-
-//     next();
-//   });
-// }
-
-
-
 
 module.exports = dbController;
 
