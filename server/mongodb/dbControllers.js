@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const dbController = {};
 
-const url =
-  "mongodb://violent-hunters:123abc@ds143143.mlab.com:43143/violent-hunters";
+// const url =
+//   "mongodb://violent-hunters:123abc@ds143143.mlab.com:43143/violent-hunters";
 
 dbController.getDatabase = (req, res, next) => {
+  let url = req.query.url;
   mongoose.connect(
     url,
     { useNewUrlParser: true }
@@ -25,6 +26,13 @@ dbController.getDatabase = (req, res, next) => {
             let modelNames = mongoose.connection.modelNames();
             let Collection;
 
+          // * Await allows us to properly save our documents
+          await Collection.find().then(docs => {
+            console.log('-----docs----', docs)
+            res.locals[collectionName] = docs;
+            delete mongoose.connection.models[collectionName];
+          });
+        }
             if(modelNames.indexOf(collectionName) !== -1){
               Collection = mongoose.connection.model(collectionName);
             }else{
@@ -37,7 +45,6 @@ dbController.getDatabase = (req, res, next) => {
               res.locals[collectionName] = docs;
             });
           }
-
           next();
         }
         catch (err) { console.log(err); }

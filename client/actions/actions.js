@@ -10,4 +10,9 @@ export const getDb = (url) => ({
 export const setUrl = (url) => ({
   type: types.actionTypes.SET_URL,
   payload: url
+});
+
+export const changeConnection = () => ({
+  type: types.actionTypes.CHANGE_CONNECTION
 })
+
