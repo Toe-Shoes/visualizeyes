@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const dbController = {};
 
-const url = "mongodb://toeshoe:123abc@ds145093.mlab.com:45093/toeshoe";
+//const url = "mongodb://toeshoe:123abc@ds145093.mlab.com:45093/toeshoe";
 
 dbController.getDatabase = (req, res, next) => {
-  // let url = req.query.url;
+  let url = req.query.url;
   mongoose.connect(
     url,
     { useNewUrlParser: true }
@@ -28,13 +28,13 @@ dbController.getDatabase = (req, res, next) => {
           modelArr.push(model);
           
           model.find({}, (err, response) => {
-            console.log(collections[i].name);
-            console.log(response);
+            // console.log(collections[i].name);
+            res.send(response);
           })
         }
 
         let modelNames = mongoose.connection.modelNames();
-        console.log('modelNames', modelNames);
+        // console.log('modelNames', modelNames);
 
         
         // console.log("modelArr\n\n\n\n\n\n\n\n\n");

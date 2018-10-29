@@ -17,9 +17,7 @@ app.use(function(req, res, next) {
 });
 
 // Get request to get the database for users
-app.get('/app', dbControllers.getDatabase, (req, res) => {
-  res.status(200).json(res.locals).end();
-});
+app.get('/app', dbControllers.getDatabase);
 
 // //if anything else redifect us to index.html
 // app.get('*', (req, res) => {
