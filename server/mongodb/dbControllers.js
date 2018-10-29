@@ -35,7 +35,10 @@ dbController.getDatabase = (req, res, next) => {
             model.find({}, (err, response) => {
               // console.log(collections[i].name);
               console.log('promises hit');
-              respArr.push(response);
+              respArr.push({
+                collectionName : collections[i].name,
+                response : response,
+              });
               resolve();
             });
           }));
@@ -54,39 +57,7 @@ dbController.getDatabase = (req, res, next) => {
         console.log('modelNames', modelNames);
       }
     )
-    
 
-      // .then(async ((collections) => {
-      //   try {
-      //     // we loop through the collections and use .find to get all the documents in the collection
-      //     for (let i = 0; i < collections.length; i++) {
-      //       let collectionName = collections[i].name;
-            // let modelNames = mongoose.connection.modelNames();
-      //       let Collection;
-
-      //       // * Await allows us to properly save our documents
-      //       await (Collection.find().then(docs => {
-      //         console.log('-----docs----', docs)
-      //         res.locals[collectionName] = docs;
-      //         delete mongoose.connection.models[collectionName];
-      //       }));
-      //     }
-
-      //     if(modelNames.indexOf(collectionName) !== -1){
-      //       Collection = mongoose.connection.model(collectionName);
-      //     }else{
-      //       Collection = mongoose.model(collectionName, new Schema({}), collectionName);
-      //     } 
-
-      //       // // * Await allows us to properly save our documents
-      //       // await Collection.find().then(docs => {
-      //       //   console.log("IT REACHES HERE")
-      //       //   res.locals[collectionName] = docs;
-      //       // });
-      //       next();
-      //   }
-      //   catch (err) { console.log(err); }
-      // }))
       .catch(err => console.log("-----CollectionError-----", err));
   });
 };
