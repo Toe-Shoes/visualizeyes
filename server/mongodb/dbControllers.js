@@ -17,36 +17,45 @@ dbController.getDatabase = (req, res, next) => {
     const coll = mongoose.connection.db.listCollections().toArray();
     // coll returns a promise so we use .then
     //* We need async await here so that we properly saving the documents in our response
+    let promArr = [];
+    let respArr = [];
+
     coll.then(
       (collections) => {
         //console.log(collections);
         const modelArr = [];
 
+        
         for (let i = 0; i < collections.length-1; i++) {
 
           let model = mongoose.model(collections[i].name, new Schema({}), collections[i].name);
           modelArr.push(model);
           
-          model.find({}, (err, response) => {
-            // console.log(collections[i].name);
-            res.send(response);
-          })
+          promArr.push(new Promise((resolve, reject) => {
+            model.find({}, (err, response) => {
+              // console.log(collections[i].name);
+              console.log('promises hit');
+              respArr.push(response);
+              resolve();
+            });
+          }));
         }
 
+        Promise.all(promArr)
+        .then(() => {
+          console.log('all promises complete');
+          res.send(respArr);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+
         let modelNames = mongoose.connection.modelNames();
-        // console.log('modelNames', modelNames);
-
-        
-        // console.log("modelArr\n\n\n\n\n\n\n\n\n");
-        
-        // console.log(modelArr);
-
-        // let modelNames = mongoose.connection.modelNames();
-        // console.log("modelNames\n\n\n\n\n\n\n\n\n");
-  
-        // console.log(modelNames);
+        console.log('modelNames', modelNames);
       }
     )
+    
+
       // .then(async ((collections) => {
       //   try {
       //     // we loop through the collections and use .find to get all the documents in the collection
