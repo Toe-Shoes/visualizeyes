@@ -14,5 +14,12 @@ export const setUrl = (url) => ({
 
 export const changeConnection = () => ({
   type: types.actionTypes.CHANGE_CONNECTION
-})
+});
+
+export const setDBData = (data) => ({
+  type: types.actionTypes.SET_DB_DATA,
+  payload: data,
+});
+
+
 

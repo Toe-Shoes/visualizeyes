@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// import FileContainer from './containers/FileContainer.jsx';
-// import DatabaseContainer from './containers/DatabaseContainer.jsx';
+import { connect } from 'react-redux';
 import MainContainer from './containers/MainContainer.jsx';
 import LandingPage from './containers/LandingPage.jsx';
 
@@ -24,6 +23,7 @@ class App extends Component {
 
 
   render() {
+    console.log(this.props.connection);
     return (
       <div id="container">
         <div>
@@ -38,4 +38,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
