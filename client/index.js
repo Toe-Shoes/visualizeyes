@@ -5,7 +5,7 @@ import App from './App.jsx';
 import store from './store';
 
 import styles from './scss/application.scss';
-
+//test comment
 render(
   <Provider store={store}>
     <App />
