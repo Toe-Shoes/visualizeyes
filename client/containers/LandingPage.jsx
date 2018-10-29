@@ -17,6 +17,9 @@ const mapDispatchToProps = dispatch => ({
   },
   changeConnection: () => {
     dispatch(actions.changeConnection())
+  },
+  setDBData : (data) => {
+    dispatch(actions.setDBData(data));
   }
 });
 
@@ -31,8 +34,13 @@ class LandingPage extends Component {
       return res.json()
     })
     .then ((res) => {
-       console.log('---------Response to client---------',res);
-       this.props.changeConnection();
+      if(res.ConnectionError) {
+        console.log('connectionError');
+      } else {
+        console.log('---------Response to client---------\n',res);
+        this.props.changeConnection();
+        this.props.setDBData(res);
+      }
     })
 
     .catch(err => console.log(err));
