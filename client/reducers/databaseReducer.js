@@ -21,7 +21,12 @@ const databaseReducer = (state = initalState, action) => {
     }
 
     case types.actionTypes.CHANGE_CONNECTION: {
-      let connection = !state.connection;
+      let connection;
+      if (!state.connection) {
+          connection = true;
+      } else {
+          connection = state.connection;
+      }
       return {
         ...state,
         data : JSON.parse(JSON.stringify(state.data)),

@@ -27,8 +27,15 @@ class LandingPage extends Component {
   constructor(props) {
     super(props);
   }
+  
+  timeouts = [];
 
-  fetchOnClick() {
+  fetchOnClick = () => {
+    for (let i = 0; i < this.timeouts.length; i++) {
+      clearTimeout(this.timeouts[i]);
+    }
+    this.timeouts = [];
+
     fetch(`http://localhost:8080/app?url=${this.props.url}`)
     .then((res) => {
       return res.json()
@@ -38,6 +45,10 @@ class LandingPage extends Component {
         console.log('connectionError');
       } else {
         console.log('---------Response to client---------\n',res);
+        this.timeouts.push(setTimeout(() => {
+          console.log("Timeout!");
+          this.fetchOnClick()
+        }, 5000));
         this.props.changeConnection();
         this.props.setDBData(res);
       }
