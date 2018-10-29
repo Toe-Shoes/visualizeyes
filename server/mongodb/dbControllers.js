@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const dbController = {};
 
-const url =
-  "mongodb://toeshoe:123abc@ds145093.mlab.com:45093/toeshoe";
+const url = "mongodb://toeshoe:123abc@ds145093.mlab.com:45093/toeshoe";
 
 dbController.getDatabase = (req, res, next) => {
   // let url = req.query.url;
