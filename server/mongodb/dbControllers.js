@@ -50,8 +50,8 @@ dbController.getDatabase = (req, res, next) => {
               // console.log(collections[i].name);
               console.log('promises hit');
               respArr.push({
-                response : response,
                 collectionName : collections[i].name,
+                response : response,
               });
               resolve();
             });
