@@ -35,12 +35,11 @@ module.exports = {
   },
   devServer: {
     contentBase: path.resolve(__dirname, '.'),
-    host: '0.0.0.0',
-    port: 3000,
+    port: 8080,
     open: true,
     hot: true,
     proxy: {
-      '/app': 'https://localhost:8080'
+      '/getdb': 'https://localhost:3000'
     }
   },
   plugins: [
