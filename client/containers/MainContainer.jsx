@@ -4,11 +4,17 @@ import DatabaseContainer from './DatabaseContainer.jsx';
 
 const MainContainer = (props) => {
   return(
-    <div>
+    <div style={styles}>
     <FileContainer />
     <DatabaseContainer />
     </div>
   );
 }
+
+const styles={
+  display : 'flex',
+  width: '100%',
+}
+
 
 export default MainContainer;

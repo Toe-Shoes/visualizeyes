@@ -5,8 +5,9 @@ const dbController = {};
 //const url = "mongodb://toeshoe:123abc@ds145093.mlab.com:45093/toeshoe";
 
 dbController.getDatabase = (req, res, next) => {
+  console.log('-----dbController.getDatabase()-----')
   let url = req.query.url;
-  mongoose.connect(
+  let dbConn = mongoose.createConnection(
     url,
     { useNewUrlParser: true },
     (err) => {
@@ -20,10 +21,10 @@ dbController.getDatabase = (req, res, next) => {
     }
   );
   // Runs this logic once there is an open connection with the database
-  mongoose.connection.on("open", () => {
-    console.log("We are connected on line 16 to mongoose")
+  dbConn.on("open", () => {
+    console.log("We are connected on line 16 to dbConn")
     // Gets all the collections inside our database and turns it into an array
-    const coll = mongoose.connection.db.listCollections().toArray();
+    const coll = dbConn.db.listCollections().toArray();
     let promArr = [];
     let respArr = [];
 
@@ -34,36 +35,38 @@ dbController.getDatabase = (req, res, next) => {
         
         for (let i = 0; i < collections.length-1; i++) {
 
-          let modelNames = mongoose.connection.modelNames();
+          let modelNames = dbConn.modelNames();
           let model;
           
           if(!modelNames.includes(collections[i].name)){
-            model = mongoose.model(collections[i].name, new Schema({}), collections[i].name);
+            model = dbConn.model(collections[i].name, new Schema({}), collections[i].name);
             modelArr.push(model);
           } else {
-            model = mongoose.models[Object.keys(mongoose.models)[i]];
+            model = dbConn.models[Object.keys(dbConn.models)[i]];
           }
 
-          //console.log(mongoose.models);
+          //console.log(dbConn.models);
           promArr.push(new Promise((resolve, reject) => {
+            console.log('Promise created.');
             model.find({}, (err, response) => {
-              // console.log(collections[i].name);
-              console.log('promises hit');
               respArr.push({
                 collectionName : collections[i].name,
                 response : response,
               });
-              resolve();
+              resolve(console.log('Promise resolved.'));
             });
           }));
         }
 
         Promise.all(promArr)
         .then(() => {
-          console.log('all promises complete');
+          console.log('All promises resolved.');
           res.send(respArr);
-          mongoose.connection.close();
-          console.log('ConnectionClosed');
+          dbConn.close((err) => {
+            if (err) {console.warn(err)}
+            else { console.log('ConnectionClosed'); }
+          });
+          
         })
         .catch(err => {
           console.log(err);

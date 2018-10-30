@@ -21,5 +21,10 @@ export const setDBData = (data) => ({
   payload: data,
 });
 
+export const setCurrentCollection = (collection) => ({
+  type: types.actionTypes.SET_CURRENT_COLLECTION,
+  payload: collection,
+})
+
 
 

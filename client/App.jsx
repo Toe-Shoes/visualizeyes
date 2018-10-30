@@ -23,19 +23,25 @@ class App extends Component {
 
 
   render() {
-    console.log(this.props.connection);
     return (
-      <div id="container">
-        <div>
-          {this.props.connection === true ? (
-            <MainContainer />
-          ) : (
-            <LandingPage />
-          )}
-        </div>
+      <div id="container" style={styles}>
+        
+        {/* {this.props.connection === true ? (
+          <MainContainer />
+        ) : (
+          <LandingPage />
+        )} */}
+        <LandingPage></LandingPage>
+        <MainContainer></MainContainer>
+        
       </div>
     );
   }
+}
+
+const styles = {
+  display : 'flex',
+  flexDirection : 'column',
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -4,7 +4,6 @@ import SearchBar from '../components/SearchBar.jsx';
 import * as actions from '../actions/actions';
 
 const mapStateToProps = store => {
-  console.log(store);
   return ({
     connection: store.connection,
     url: store.url
@@ -45,10 +44,10 @@ class LandingPage extends Component {
         console.log('connectionError');
       } else {
         console.log('---------Response to client---------\n',res);
-        this.timeouts.push(setTimeout(() => {
-          console.log("Timeout!");
-          this.fetchOnClick()
-        }, 5000));
+        // this.timeouts.push(setTimeout(() => {
+        //   console.log("Timeout!");
+        //   this.fetchOnClick()
+        // }, 5000));
         this.props.changeConnection();
         this.props.setDBData(res);
       }
@@ -60,9 +59,10 @@ class LandingPage extends Component {
 
   render() {
     return(
-      <div>
+      <div style={{width:'100%'}}>
         <h1> VisualEyes </h1>
         <h3> Database GUI </h3>
+        mongodb://toeshoe:123abc@ds145093.mlab.com:45093/toeshoe
         <SearchBar
           setUrl = {this.props.setUrl}
           fetchOnClick = {this.fetchOnClick.bind(this)}
