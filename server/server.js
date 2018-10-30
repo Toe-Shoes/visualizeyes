@@ -42,9 +42,20 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveU
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('/visualeyes', 
+    require('connect-ensure-login').ensureLoggedIn(),
+    function(req, res){
+      console.log(req.user);
+      res.sendFile(path.resolve(__dirname + '/../build/index.html'));
+    });
+
+app.get('/webpack-bundle.js', 
+  function(req, res) {
+    res.sendFile(path.resolve(__dirname + '/../build/webpack-bundle.js'));
+  });
 
 // Define routes.
-app.get('/test',
+app.get('/',
   function(req, res) {
     res.render('home', { user: req.user });
   });
@@ -60,7 +71,7 @@ app.get('/login/github',
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/test');
+    res.redirect('/visualeyes');
   });
 
 app.get('/profile',
