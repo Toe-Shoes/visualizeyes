@@ -25,7 +25,7 @@ class DatabaseContainer extends Component {
     if(currentCollectionObj.length >0){
       documents = currentCollectionObj[0].response.map((document, i) => {
         return (
-          <DocumentObject data={document} key={i} indentation={0}></DocumentObject>
+          <DocumentObject data={document} key={i} indentation={0} completeData={document}></DocumentObject>
         )
       });
     }

@@ -35,7 +35,7 @@ class LandingPage extends Component {
     }
     this.timeouts = [];
 
-    fetch(`http://localhost:8080/app?url=${this.props.url}`)
+    fetch(`http://localhost:8080/getdb?url=${this.props.url}`)
     .then((res) => {
       return res.json()
     })

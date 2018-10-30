@@ -77,4 +77,8 @@ dbController.getDatabase = (req, res, next) => {
   });
 };
 
+dbController.updateDatabase = (req, res, next) => {
+
+}
+
 module.exports = dbController;
