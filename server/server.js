@@ -5,6 +5,8 @@ const path = require('path'); //directing path for path__dirname
 const PORT = process.env.PORT || 8080;
 const app = express();
 const dbControllers = require('./mongodb/dbControllers');
+const authRoutes = require('./routes/auth-routes.js');
+
 
 app.use(express.static(path.join(__dirname, './../build/webpack-bundle.js')));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,7 +19,9 @@ app.use(function(req, res, next) {
 });
 
 // Get request to get the database for users
-app.get('/app', dbControllers.getDatabase);
+app.get('/app', dbControllers.getDatabase, (req, res) => {
+  res.status(200).json(res.locals).end();
+});
 
 // //if anything else redifect us to index.html
 // app.get('*', (req, res) => {

@@ -5,7 +5,6 @@ import MainContainer from './containers/MainContainer.jsx';
 import LandingPage from './containers/LandingPage.jsx';
 
 
-
 const mapStateToProps = store => ({
   connection: store.connection
 });
