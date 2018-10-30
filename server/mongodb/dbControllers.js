@@ -35,8 +35,8 @@ dbController.getDatabase = (req, res, next) => {
         for (let i = 0; i < collections.length-1; i++) {
 
           let modelNames = mongoose.connection.modelNames();
-          //console.log('modelNames', modelNames);
           let model;
+          
           if(!modelNames.includes(collections[i].name)){
             model = mongoose.model(collections[i].name, new Schema({}), collections[i].name);
             modelArr.push(model);
