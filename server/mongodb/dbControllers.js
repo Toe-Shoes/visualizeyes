@@ -114,16 +114,16 @@ dbController.updateDatabase = (req, res, next) => {
     console.log('olddata', oldData);
     console.log('newdata', newData);
 
-    let schemaObj = GenerateSchema.mongoose(newData);
+    let schemaObj = GenerateSchema.mongoose(oldData);
     delete schemaObj._id;
     console.log('schema obj' ,schemaObj);
 
     let model = dbConn.model(collectionName, new Schema(schemaObj), collectionName);
     
-    model.findByIdAndUpdate(oldData._id, newData, (err, response) => {
+    model.findOneAndUpdate(oldData, newData, (err, response) => {
       console.log(response);
 
-      res.send(response)
+      res.send(response);
     });
   });
 }

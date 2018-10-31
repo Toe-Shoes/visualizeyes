@@ -6,6 +6,7 @@ const initalState = {
   connection: false,
   data : [],
   currentCollection : '',
+  documentFieldRowRefreshFunctions : [],
 };
 
 const databaseReducer = (state = initalState, action) => {
@@ -51,6 +52,7 @@ const databaseReducer = (state = initalState, action) => {
       let currentCollection = action.payload;
       return {
         ...state,
+        data : JSON.parse(JSON.stringify(state.data)),
         currentCollection,
       }
     }

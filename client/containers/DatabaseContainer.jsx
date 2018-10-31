@@ -15,6 +15,7 @@ class DatabaseContainer extends Component {
   constructor(props){
     super(props);
   }
+
   render(){
     //identify current collection
     let currentCollectionObj = this.props.data.filter((collectionObj) => {
@@ -26,7 +27,7 @@ class DatabaseContainer extends Component {
       documents = currentCollectionObj[0].response.map((document, i) => {
         let documentDeepClone = JSON.parse(JSON.stringify(document));
         return (
-          <DocumentObject data={documentDeepClone} key={i} indentation={0} completeData={documentDeepClone}></DocumentObject>
+          <DocumentObject data={documentDeepClone} key={i} indentation={0} completeData={documentDeepClone} > </DocumentObject>
         )
       });
     }

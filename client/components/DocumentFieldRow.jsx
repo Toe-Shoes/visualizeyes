@@ -5,13 +5,13 @@ import * as actions from '../actions/actions';
 const mapStateToProps = store => ({
   currentCollection : store.currentCollection,
   url: store.url,
-  data : store.data,
+  storeData : store.data,
 });
 
 const mapDispatchToProps = dispatch => ({
   setDBData : (data) => {
     dispatch(actions.setDBData(data));
-  }
+  },
 });
 
 class DocumentFieldRow extends Component {
@@ -19,13 +19,34 @@ class DocumentFieldRow extends Component {
     super(props);
     this.state={
       originalCompleteData : JSON.parse(JSON.stringify(this.props.completeData)),
-      updatedValue : JSON.parse(JSON.stringify(this.props.value))
+      updatedValue : JSON.parse(JSON.stringify(this.props.value)),
+      originalCompleteStoreData : JSON.parse(JSON.stringify(this.props.storeData))
     }
     this.updateNewValue=this.updateNewValue.bind(this);
     this.updateDB = this.updateDB.bind(this);
+    this.refreshStateFromStore = this.refreshStateFromStore.bind(this);
+
+    setInterval((() => {
+      if(JSON.stringify(this.state.originalCompleteStoreData) != JSON.stringify(this.props.storeData)){
+        this.refreshStateFromStore();
+        alert('SOMETHING HAS CHANGED');
+      }
+    }),2500)
+  }
+  
+  refreshStateFromStore = function () {
+    this.setState ({
+      originalCompleteData : JSON.parse(JSON.stringify(this.props.completeData)),
+      updatedValue : JSON.parse(JSON.stringify(this.props.value)),
+      originalCompleteStoreData : JSON.parse(JSON.stringify(this.props.storeData)),
+    });
   }
 
   updateNewValue = function (e){
+    
+    console.log('state value', this.state.updatedValue);
+    console.log('props value', this.props.value);
+
     this.setState({
       updatedValue : e.target.value,
     });
@@ -34,9 +55,14 @@ class DocumentFieldRow extends Component {
   updateDB = function (){
     //update the complete data once
     this.props.data[this.props.Key] = this.state.updatedValue;
+    //this.props.data[this.props.Key] === this.props.value
 
-    console.log(this.props.completeData);
-    console.log(this.state.originalCompleteData);
+    console.log('state value', this.state.updatedValue);
+    console.log('props value', this.props.data[this.props.Key]);
+
+    console.log('state complete data', this.state.originalCompleteData);
+    console.log('props complete data', this.props.completeData);
+    
 
     //create post object
     let postObj = {
@@ -71,6 +97,7 @@ class DocumentFieldRow extends Component {
           } else {
             console.log('---------Response to client---------\n',res);
             this.props.setDBData(res);
+            this.refreshStateFromStore();
           }
         })
       }

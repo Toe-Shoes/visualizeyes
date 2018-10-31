@@ -25,9 +25,9 @@ const mapDispatchToProps = dispatch => ({
 class LandingPage extends Component {
   constructor(props) {
     super(props);
+    this.timeouts = [];
   }
   
-  timeouts = [];
 
   fetchOnClick = () => {
     for (let i = 0; i < this.timeouts.length; i++) {
