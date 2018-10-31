@@ -1,34 +1,82 @@
-<div class="row">
+<link href="https://fonts.googleapis.com/css?family=Chakra+Petch:400,700" rel="stylesheet">
+
+<video autoplay muted loop id="myVideo">
+  <source src="https://static.videezy.com/system/resources/previews/000/008/090/original/Data_Grid.mp4" type="video/mp4">
+</video>
+
+<div class="content">
+  <h1> Welcome To VisualEyes</h1>
+  <h2> Click for secure Github login </h2>
+  <!-- Use a button to pause/play the video with JavaScript -->
+  <a href="/login/github"><button id="myBtn">Login</button></a>
+</div>
+ <!-- <div class="row">
   <div class="col-sm-8">
       <div class="jumbotron">
 
-          <body style="background-color: burlywood">
+          <body style="background-color: burlywood"> -->
               <style type="text/css" scoped>
-                  header {
-                      color: blue
-                  }
+                 #myVideo {
+                  position: fixed;
+                  right: 0;
+                  bottom: 0;
+                  min-width: 100%; 
+                  min-height: 100%;
+                }
 
-                  h1 {
-                      color: red;
-                      text-align: center
-                  }
+                /* Add some content at the bottom of the video/page */
+          .content {
+              position: fixed;
+              bottom: 50%;
+              background: rgba(0, 0, 0, 0);
+              color: #f1f1f1;
+              width: 100%;
+              text-align: center;
+          }
 
-                  h2 {
-                      color: blue;
-                      text-align: center;
-                  }
+          h1, h2 {
+            text-shadow: 4px 6px 5px rgba(0,0,0,0.5);;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+          }
+          h1 {
+            font-size: 50px;
+          }
+          h2 {
+            font-size: 36px;
+          }
 
-                  .aligncenter {
-                      text-align: center
-                  }
-                
-  
-              </style>
+          /* Style the button used to pause/play the video */
+          #myBtn {
+              width: 200px;
+              font-size: 18px;
+              padding: 10px;
+              border: none;
+              background: #76b5a8;
+              color: #fff;
+              cursor: pointer;
+              border-radius: 5px;
+          }
 
-              <h1> Welcome To VisualEyes</h1>
+          #myBtn:hover {
+              background: #ddd;
+              color: black;
+              -o-transition:color .5s ease-out;
+              -ms-transition:color .5s ease-out;
+              -moz-transition:color .5s ease-out;
+              -webkit-transition:color .5s ease-out;
+              /* ...and now override with proper CSS property */
+              transition:color .5s ease-out;
+          }
+
+</style>
+
+              
+
+            
 
 
-              <h2> Click for secure authorized login </h2>
+              <!-- <h2> Click for secure authorized login </h2>
               <p class="aligncenter">
                   <a href="/login/github">
                   <img src="https://static.addtoany.com/images/blog/github-icon.png" />
@@ -36,4 +84,4 @@
               </p>
               </style>
       </div>
-  </div>
+  </div>  --> -->
