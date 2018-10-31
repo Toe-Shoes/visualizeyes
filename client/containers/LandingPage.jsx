@@ -38,9 +38,6 @@ class LandingPage extends Component {
   timeouts = [];
 
   fetchOnClick = () => {
-    if (!this.state.urlStorage.includes(this.props.url)){
-      this.state.urlStorage.push(this.props.url)
-    }
     console.log(this.state.urlStorage);
     for (let i = 0; i < this.timeouts.length; i++) {
       clearTimeout(this.timeouts[i]);
@@ -62,6 +59,11 @@ class LandingPage extends Component {
         // }, 5000));
         this.props.changeConnection();
         this.props.setDBData(res);
+        if (!this.state.urlStorage.includes(this.props.url)){
+          let urlStorageCopy = JSON.parse(JSON.stringify(this.state.urlStorage));
+          urlStorageCopy.push(this.props.url);
+          this.setState({urlStorage: urlStorageCopy});
+        }
         document.querySelector('input').value = "";
       }
     })
