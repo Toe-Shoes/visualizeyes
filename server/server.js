@@ -64,10 +64,10 @@ app.get('/',
     res.render('login');
   });
 
-  app.get('/webpack-bundle.js', 		
-      function(req, res) {		
-      res.sendFile(path.resolve(__dirname + '/../build/webpack-bundle.js'));		
-  });
+app.get('/webpack-bundle.js', 		
+    function(req, res) {		
+    res.sendFile(path.resolve(__dirname + '/../build/webpack-bundle.js'));		
+});
 
 app.get('/login/github',
   passport.authenticate('github'));

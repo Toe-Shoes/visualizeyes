@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DocumentObject from './DocumentObject.jsx';
+import ChangeMade from '../components/ChangeMade.jsx';
 
 const mapStateToProps = store => ({
   currentCollection : store.currentCollection,
@@ -36,6 +37,7 @@ class DatabaseContainer extends Component {
     return(
       <div id="db-container" style={styles}>
         <h3>Documents</h3>
+        <ChangeMade></ChangeMade>
         {documents}
       </div>
     )
