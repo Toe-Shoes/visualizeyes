@@ -60,9 +60,9 @@ class LandingPage extends Component {
         //   console.log("Timeout!");
         //   this.fetchOnClick()
         // }, 5000));
-        // document.querySelector('input').value = "";
         this.props.changeConnection();
         this.props.setDBData(res);
+        document.querySelector('input').value = "";
       }
     })
 
