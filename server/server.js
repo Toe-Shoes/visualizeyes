@@ -20,6 +20,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+
 passport.use(new Strategy({
     clientID: "2dc2eeb9fde8048cd538",
     clientSecret: "49c4b350d4731ab68cbc1e219b104b03e74e80c7",
@@ -61,6 +62,11 @@ app.get('/visualeyes',
 app.get('/',
   function(req, res){
     res.render('login');
+  });
+
+  app.get('/webpack-bundle.js', 		
+      function(req, res) {		
+      res.sendFile(path.resolve(__dirname + '/../build/webpack-bundle.js'));		
   });
 
 app.get('/login/github',
