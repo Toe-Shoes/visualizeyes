@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SearchBar from '../components/SearchBar.jsx';
 import * as actions from '../actions/actions';
+import Cookies from 'js-cookie';
+
 
 const mapStateToProps = store => {
   return ({
@@ -23,8 +25,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class LandingPage extends Component {
+
   constructor(props) {
     super(props);
+    this.state = {
+      name: Cookies.get('username'),
+    };
   }
   
   timeouts = [];
@@ -34,7 +40,7 @@ class LandingPage extends Component {
       clearTimeout(this.timeouts[i]);
     }
     this.timeouts = [];
-
+    
     fetch(`http://localhost:3000/getdb?url=${this.props.url}`)
     .then((res) => {
       return res.json()
@@ -61,7 +67,7 @@ class LandingPage extends Component {
     return(
       <div style={{width:'100%'}}>
         <h1> VisualEyes </h1>
-        <h3> Database GUI </h3>
+        <h3> Welcome, {this.state.name} to your MongoDB Viewer Dashboard </h3>
         mongodb://toeshoe:123abc@ds145093.mlab.com:45093/toeshoe
         <SearchBar
           setUrl = {this.props.setUrl}

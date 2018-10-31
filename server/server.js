@@ -45,6 +45,7 @@ app.use(passport.session());
 app.get('/visualeyes', 
     require('connect-ensure-login').ensureLoggedIn(),
     function(req, res){
+      res.cookie('username',req.user.username);
       console.log(req.user);
       res.sendFile(path.resolve(__dirname + '/../build/index.html'));
     });
