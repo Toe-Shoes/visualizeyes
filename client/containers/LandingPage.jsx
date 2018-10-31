@@ -34,6 +34,7 @@ class LandingPage extends Component {
       name: Cookies.get('username'),
       urlStorage: []
     };
+    this.getFavoriteConnections();
   }
   
 
@@ -53,23 +54,60 @@ class LandingPage extends Component {
         console.log('connectionError');
       } else {
         console.log('---------Response to client---------\n',res);
-        this.timeouts.push(setTimeout(() => {
-          console.log("Timeout!");
-          this.fetchOnClick()
-        }, 2500));
+        // this.timeouts.push(setTimeout(() => {
+        //   console.log("Timeout!");
+        //   this.fetchOnClick()
+        // }, 2500));
         this.props.changeConnection();
         this.props.setDBData(res);
-        if (!this.state.urlStorage.includes(this.props.url)){
-          let urlStorageCopy = JSON.parse(JSON.stringify(this.state.urlStorage));
-          urlStorageCopy.push(this.props.url);
-          this.setState({urlStorage: urlStorageCopy});
-        }
+        // if (!this.state.urlStorage.includes(this.props.url)){
+        //   let urlStorageCopy = JSON.parse(JSON.stringify(this.state.urlStorage));
+        //   urlStorageCopy.push(this.props.url);
+        //   this.setState({urlStorage: urlStorageCopy});
+        // }
+        this.postFavoriteConnection();
         document.querySelector('input').value = "";
       }
     })
 
     .catch(err => console.log(err));
     // console.log(this.props, '------url-----')
+  }
+
+  postFavoriteConnection() {
+    let postBody = {
+      url : this.props.url,
+      userName : Cookies.get('username'),
+    }
+    fetch ('http://localhost:3000/sessions', {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json',
+      },
+      body : JSON.stringify(postBody),
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      let urls = [];
+      res.urls.forEach(url => {
+        urls.push(url);
+      });
+      this.setState({urlStorage: urls});
+    });
+  }
+
+  getFavoriteConnections() {
+    fetch (`http://localhost:3000/sessions?userName=${Cookies.get('username')}`)
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      let urls = [];
+      res.urls.forEach(url => {
+        urls.push(url);
+      });
+      this.setState({urlStorage: urls});
+    });
   }
 
   render() {

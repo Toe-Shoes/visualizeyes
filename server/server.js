@@ -5,6 +5,7 @@ const path = require('path'); //directing path for path__dirname
 const PORT = process.env.PORT || 3000;
 const app = express();
 const dbControllers = require('./mongodb/dbControllers');
+const sessionController = require('./sessions/sessionController.js');
 
 var passport = require('passport');
 var Strategy = require('passport-github').Strategy;
@@ -89,6 +90,8 @@ app.get('/profile',
 app.get('/getdb', dbControllers.getDatabase);
 app.post('/getdb', dbControllers.updateDatabase);
 
+app.get('/sessions', sessionController.getConnections)
+app.post('/sessions', sessionController.addConnection)
 
 
 // //if anything else redifect us to index.html
