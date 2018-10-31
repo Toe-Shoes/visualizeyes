@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const GenerateSchema = require('generate-schema');
+
+
 const dbController = {};
 
 //const url = "mongodb://toeshoe:123abc@ds145093.mlab.com:45093/toeshoe";
@@ -34,6 +37,7 @@ dbController.getDatabase = (req, res, next) => {
         const modelArr = [];
         
         for (let i = 0; i < collections.length-1; i++) {
+          console.log(collections[i].name);
 
           let modelNames = dbConn.modelNames();
           let model;
@@ -79,6 +83,49 @@ dbController.getDatabase = (req, res, next) => {
 
 dbController.updateDatabase = (req, res, next) => {
 
+  let body = JSON.parse((Object.keys(req.body)[0]));
+
+  console.log('-----dbController.updateDatabase()-----');
+
+  let url = body.url;
+  let newData = body.newData;
+  let oldData = body.oldData;
+  let collectionName = body.collection;
+
+  let dbConn = mongoose.createConnection(
+    url,
+    { useNewUrlParser: true },
+    (err) => {
+      if (err){
+        res.header(500);
+        res.send({
+          ConnectionError: 'Invalid Connection URL'
+        });
+        return;
+      }
+    }
+  );
+  // Runs this logic once there is an open connection with the database
+  dbConn.on("open", () => {
+    delete newData["_id"];
+
+    console.log("We are connected to db.")
+
+    console.log('olddata', oldData);
+    console.log('newdata', newData);
+
+    let schemaObj = GenerateSchema.mongoose(newData);
+    delete schemaObj._id;
+    console.log('schema obj' ,schemaObj);
+
+    let model = dbConn.model(collectionName, new Schema(schemaObj), collectionName);
+    
+    model.findByIdAndUpdate(oldData._id, newData, (err, response) => {
+      console.log(response);
+
+      res.send(response)
+    });
+  });
 }
 
 module.exports = dbController;

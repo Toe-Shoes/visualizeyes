@@ -42,6 +42,7 @@ class App extends Component {
 const styles = {
   display : 'flex',
   flexDirection : 'column',
+  height: '100%',
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

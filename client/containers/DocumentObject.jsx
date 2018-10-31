@@ -33,7 +33,7 @@ class DocumentObject extends Component {
           documentChildren.push(<DocumentObject key={key} Key={key} data={this.props.data[key]} indendation={1} completeData={this.props.completeData}></DocumentObject>)
         } else {
           //add just a field row for non objects
-          documentChildren.push(<DocumentFieldRow Key={key} value={this.props.data[key]} type={typeof this.props.data[key]} key={key} completeData={this.props.completeData}></DocumentFieldRow>)
+          documentChildren.push(<DocumentFieldRow Key={key} value={this.props.data[key]} type={typeof this.props.data[key]} key={key} data={this.props.data} completeData={this.props.completeData}></DocumentFieldRow>)
         }
       }
     }

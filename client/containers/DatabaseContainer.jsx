@@ -24,8 +24,9 @@ class DatabaseContainer extends Component {
     let documents = [];
     if(currentCollectionObj.length >0){
       documents = currentCollectionObj[0].response.map((document, i) => {
+        let documentDeepClone = JSON.parse(JSON.stringify(document));
         return (
-          <DocumentObject data={document} key={i} indentation={0} completeData={document}></DocumentObject>
+          <DocumentObject data={documentDeepClone} key={i} indentation={0} completeData={documentDeepClone}></DocumentObject>
         )
       });
     }
@@ -42,6 +43,7 @@ class DatabaseContainer extends Component {
 
 const styles = {
   width: '80%',
+  height: '100%',
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DatabaseContainer);

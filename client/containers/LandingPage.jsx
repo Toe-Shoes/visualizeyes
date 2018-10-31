@@ -44,10 +44,10 @@ class LandingPage extends Component {
         console.log('connectionError');
       } else {
         console.log('---------Response to client---------\n',res);
-        // this.timeouts.push(setTimeout(() => {
-        //   console.log("Timeout!");
-        //   this.fetchOnClick()
-        // }, 5000));
+        this.timeouts.push(setTimeout(() => {
+          console.log("Timeout!");
+          this.fetchOnClick()
+        }, 2500));
         this.props.changeConnection();
         this.props.setDBData(res);
       }

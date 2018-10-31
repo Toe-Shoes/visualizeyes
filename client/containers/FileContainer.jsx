@@ -41,6 +41,7 @@ class FileContainer extends Component {
 }
 const styles = {
   width: '20%',
+  height : '100%',
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileContainer);
