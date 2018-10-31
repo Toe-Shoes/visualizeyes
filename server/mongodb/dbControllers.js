@@ -124,6 +124,10 @@ dbController.updateDatabase = (req, res, next) => {
       console.log(response);
 
       res.send(response);
+      dbConn.close((err) => {
+        if (err) {console.warn(err)}
+        else { console.log('ConnectionClosed'); }
+      });
     });
   });
 }
