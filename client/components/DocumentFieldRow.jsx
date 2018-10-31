@@ -12,6 +12,9 @@ const mapDispatchToProps = dispatch => ({
   setDBData : (data) => {
     dispatch(actions.setDBData(data));
   },
+  setChangeMadeTrue : () => {
+    dispatch(actions.setChangeMadeTrue());
+  },
 });
 
 class DocumentFieldRow extends Component {
@@ -29,7 +32,7 @@ class DocumentFieldRow extends Component {
     setInterval((() => {
       if(JSON.stringify(this.state.originalCompleteStoreData) != JSON.stringify(this.props.storeData)){
         this.refreshStateFromStore();
-        alert('SOMETHING HAS CHANGED');
+        this.props.setChangeMadeTrue();
       }
     }),2500)
   }
@@ -40,13 +43,11 @@ class DocumentFieldRow extends Component {
       updatedValue : JSON.parse(JSON.stringify(this.props.value)),
       originalCompleteStoreData : JSON.parse(JSON.stringify(this.props.storeData)),
     });
+    
+    //this.props.setChangeMadeFalse();
   }
 
   updateNewValue = function (e){
-    
-    console.log('state value', this.state.updatedValue);
-    console.log('props value', this.props.value);
-
     this.setState({
       updatedValue : e.target.value,
     });
@@ -55,14 +56,6 @@ class DocumentFieldRow extends Component {
   updateDB = function (){
     //update the complete data once
     this.props.data[this.props.Key] = this.state.updatedValue;
-    //this.props.data[this.props.Key] === this.props.value
-
-    console.log('state value', this.state.updatedValue);
-    console.log('props value', this.props.data[this.props.Key]);
-
-    console.log('state complete data', this.state.originalCompleteData);
-    console.log('props complete data', this.props.completeData);
-    
 
     //create post object
     let postObj = {
@@ -98,6 +91,7 @@ class DocumentFieldRow extends Component {
             console.log('---------Response to client---------\n',res);
             this.props.setDBData(res);
             this.refreshStateFromStore();
+            this.props.setChangeMadeTrue();
           }
         })
       }

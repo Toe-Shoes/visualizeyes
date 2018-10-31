@@ -26,6 +26,15 @@ export const setCurrentCollection = (collection) => ({
   payload: collection,
 })
 
+export const setChangeMadeTrue = () => ({
+  type: types.actionTypes.SET_CHANGE_MADE_TRUE,
+})
+export const setChangeMadeFalse = () => ({
+  type: types.actionTypes.SET_CHANGE_MADE_FALSE,
+})
+
+
+
 
 
 

@@ -7,6 +7,7 @@ const initalState = {
   data : [],
   currentCollection : '',
   documentFieldRowRefreshFunctions : [],
+  changeMade : false,
 };
 
 const databaseReducer = (state = initalState, action) => {
@@ -54,6 +55,26 @@ const databaseReducer = (state = initalState, action) => {
         ...state,
         data : JSON.parse(JSON.stringify(state.data)),
         currentCollection,
+      }
+    }
+
+    case types.actionTypes.SET_CHANGE_MADE_TRUE: {
+      console.log(action.type);
+      let changeMade = true;
+      return {
+        ...state,
+        changeMade,
+        data : JSON.parse(JSON.stringify(state.data)),
+      }
+    }
+
+    case types.actionTypes.SET_CHANGE_MADE_FALSE: {
+      console.log(action.type);
+      let changeMade = false;
+      return {
+        ...state,
+        changeMade,
+        data : JSON.parse(JSON.stringify(state.data)),
       }
     }
 
