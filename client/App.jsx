@@ -4,6 +4,10 @@ import MainContainer from './containers/MainContainer.jsx';
 import LandingPage from './containers/LandingPage.jsx';
 
 
+// console.log(localStorage.getItem('user'));
+// const test = LocalStorage.getItem('user');
+// console.log(test);
+
 
 const mapStateToProps = store => ({
   connection: store.connection
@@ -24,17 +28,18 @@ class App extends Component {
 
   render() {
     return (
-      <div id="container" style={styles}>
-        
-        {/* {this.props.connection === true ? (
-          <MainContainer />
-        ) : (
-          <LandingPage />
-        )} */}
-        <LandingPage></LandingPage>
-        <MainContainer></MainContainer>
-        
-      </div>
+     
+        <div id="container" style={styles}>
+          
+          {/* {this.props.connection === true ? (
+            <MainContainer />
+          ) : (
+            <LandingPage />
+          )} */}
+          <LandingPage></LandingPage>
+          <MainContainer></MainContainer>
+          
+        </div>
     );
   }
 }

@@ -50,29 +50,15 @@ app.set('view engine', 'ejs');
 // Initialize Passport and restore authentication state, if any, from the
 // session.
 
+app.get('/visualeyes', 
+    require('connect-ensure-login').ensureLoggedIn(),
+    function(req, res){
+      res.cookie('username',req.user.username);
+      console.log(req.user);
+      res.sendFile(path.resolve(__dirname + '/../build/index.html'));
+    });
 
-
-
-
-//STATIC ROUTES
-app.get('/visualeyes', require('connect-ensure-login').ensureLoggedIn(),
-(req, res) => {
-    console.log(req.user);
-    res.sendFile(path.resolve(__dirname + '/../build/index.html'));
-});
-
-app.get('/webpack-bundle.js', (req, res) => {
-  res.sendFile(path.resolve(__dirname + '/../build/webpack-bundle.js'));
-});
-
-
-//AUTHORIZATION ROUTES
 app.get('/',
-  function(req, res) {
-    res.render('home', { user: req.user });
-  });
-
-app.get('/login',
   function(req, res){
     res.render('login');
   });
