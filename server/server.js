@@ -56,12 +56,12 @@ app.get('/webpack-bundle.js',
   });
 
 // Define routes.
-app.get('/',
-  function(req, res) {
-    res.render('home', { user: req.user });
-  });
+// app.get('/',
+//   function(req, res) {
+//     res.render('home', { user: req.user });
+//   });
 
-app.get('/login',
+app.get('/',
   function(req, res){
     res.render('login');
   });

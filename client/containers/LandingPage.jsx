@@ -30,6 +30,7 @@ class LandingPage extends Component {
     super(props);
     this.state = {
       name: Cookies.get('username'),
+      urlStorage: []
     };
   }
   
