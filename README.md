@@ -1,11 +1,11 @@
 # VisualEyesDB
 
-## VisualEyesDB is a open source web-based GUI for real-time MongoDB updating -- once authenticated (via Github oAuth) simply type in a MongoDB url, and save  headache of the mLab UI.  
+## VisualEyesDB is a open source web-based GUI for real-time MongoDB updating -- once authenticated (via Github oAuth) simply type in a MongoDB url, and update your NoSQL db instantly, without ever visiting mLab.
 
-Iteration on existing open source VisualEyes (https://github.com/VisualEyez-DB/VisualEyes-DB) version 1.5, expands real-time editing, secure Github oAuth authentication strategy, and handles crucial edge cases, including outside users editing of the databases. Visualize offers clients an easy-to-use UI, full CRUD functionality, and visualization of data, as an alternative to the cumbersome mLab UX. 
+With the original creators' blessing, this is an iteration of [VisualEyes] (https://github.com/VisualEyez-DB/VisualEyes-DB), version 1.5, expands real-time editing, secure Github oAuth authentication strategy, and handles crucial edge cases, including outside users editing of the databases. Visualize offers clients an easy-to-use UI, full CRUD functionality, and visualization of data, as an alternative to the cumbersome mLab UX. 
 
-![alt text](VisualEyes1.png)
-![alt text](VisualEyes2.png)
+![alt text](Visualize1.png)
+![alt text](Visualize2.png)
 
 # Technologies used:
 * React
